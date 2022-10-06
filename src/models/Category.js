@@ -1,13 +1,11 @@
 import { Schema, model } from "mongoose";
 
-const expenseSchema = new Schema({
-    name: String,
+const categorySchema = new Schema({
     category: String,
-    price: Number,
     imgUrl: String
 }, {
     timestamps: true,
     versionKey: false
 });
 
-export default (model('Product', expenseSchema));
+export default (model('Category', categorySchema));
