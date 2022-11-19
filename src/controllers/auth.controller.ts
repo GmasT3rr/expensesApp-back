@@ -75,7 +75,7 @@ export const signIn = async (req:any,res:any) => {
         res.json({token,roles,userID});
         
     } catch (err) {
-        res.json({err});
+        res.status(400).json({message:"User not found"});
 
     }
 };
