@@ -4,7 +4,9 @@ const expenseSchema = new Schema({
     name: String,
     category: String,
     price: Number,
-    imgUrl: String
+    date: Date,
+    imgUrl: String,
+    userID:String
 }, {
     timestamps: true,
     versionKey: false

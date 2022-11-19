@@ -1,27 +1,27 @@
 import Category from "../models/Category";
 
-export const getCategories = async(req, res) => {
+export const getCategories = async(req:any, res:any) => {
     try {
         const response = await Category.find();
         res.status(200).json(response);
 
-    } catch (err) {
+    } catch (err:any) {
         res.status(500).json(err);
     }
 };
 
-export const createCategory = async(req, res) => {
+export const createCategory = async(req:any, res:any) => {
     const { category, imgUrl } = await req.body;
     try {
         const newCategory = new Category({ category, imgUrl });
         const savedCategory = await newCategory.save();
         res.status(201).json(savedCategory);
-    } catch (err) {
+    } catch (err:any) {
         res.status(400).json(err);
     }
 };
 
-export const getCategoryById = async(req, res) => {
+export const getCategoryById = async(req:any, res:any) => {
     const categoryId = await req.params.id;
     try {
         const response = await Category.findById(categoryId);
@@ -34,7 +34,7 @@ export const getCategoryById = async(req, res) => {
                 res.status(200).json(response);
                 break;
         }
-    } catch (err) {
+    } catch (err:any) {
         switch (err.name) {
             case 'CastError':
                 res.status(404).json({ message: 'Esta categoria no existe' });
@@ -47,7 +47,7 @@ export const getCategoryById = async(req, res) => {
     }
 };
 
-export const updateCategoryById = async(req, res) => {
+export const updateCategoryById = async(req:any, res:any) => {
     const categoryId = await req.params.id;
     try {
         const response = await Category.findByIdAndUpdate(categoryId, req.body, { new: true });
@@ -60,7 +60,7 @@ export const updateCategoryById = async(req, res) => {
                 res.status(200).json(response);
                 break;
         }
-    } catch (err) {
+    } catch (err:any) {
         switch (err.name) {
             case 'CastError':
                 res.status(404).json({ message: 'Esta categoria no existe' });
@@ -73,7 +73,7 @@ export const updateCategoryById = async(req, res) => {
     }
 };
 
-export const deleteCategoryById = async(req, res) => {
+export const deleteCategoryById = async(req:any, res:any) => {
     const categoryId = await req.params.id;
     try {
         const response = await Category.findByIdAndDelete(categoryId);
@@ -86,7 +86,7 @@ export const deleteCategoryById = async(req, res) => {
                 res.status(200).json({ message: 'Eliminado con exito', itemEliminado: response });
                 break;
         }
-    } catch (err) {
+    } catch (err:any) {
         switch (err.name) {
             case 'CastError':
                 res.status(404).json({ message: 'Esta categoria no existe' });
