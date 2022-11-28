@@ -68,11 +68,12 @@ export const signIn = async (req:any,res:any) => {
     
         if(!matchPassword) return res.status(401).json({message:"Invalid password"});
     
+        const expiresIn = 10800    // 10800s = 3hs => 3600s = 1h
         const token = jwt.sign({id:userFound._id},config.SECRET,{
-            expiresIn:86400 // 24 hs
+            expiresIn:expiresIn 
         })
     
-        res.json({token,roles,userID});
+        res.json({token,roles,userID,expiresIn});
         
     } catch (err) {
         res.status(400).json({message:"User not found"});
