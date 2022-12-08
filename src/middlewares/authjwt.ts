@@ -27,14 +27,31 @@ try {
 }
 };
 
-    
-export const isAdmin = async (req:any,res:any,next:any) => {
+ export const isAdmin = async (req:any,res:any,next:any) => {
+     const user:any = await User.findById(req.userId);
+     // const roles = await Role.find({_id:{$in:user.roles.name}});
+     const roles = await Role.find(user.roles);
+     for(let i = 0; i < roles.length; i++){
+         if(roles[i].name === "admin"){
+             next();
+             return;
+         }else{
+             return res.status(401).json({message:"Unauthrized. Required Admin permissions"});
+         }
+     }
+
+
+ };
+
+//I want anyone to be able to use the app.
+//I'll change it later
+export const anyRole = async (req:any,res:any,next:any) => {
     const user:any = await User.findById(req.userId);
     // const roles = await Role.find({_id:{$in:user.roles.name}});
     const roles = await Role.find(user.roles);
 
     for(let i = 0; i < roles.length; i++){
-        if(roles[i].name === "admin"){
+        if(roles[i].name === "admin" || 'moderator' || 'user'){
             next();
             return;
         }else{

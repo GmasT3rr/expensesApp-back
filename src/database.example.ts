@@ -1,6 +1,6 @@
 import mongoose, { ConnectOptions } from "mongoose";
-const mongoURI = 'mongodb+srv://lucramallo14:xSuQYrZRVtVqWsoQ@eacluster.f4wlrvp.mongodb.net/?retryWrites=true&w=majority';
-// const mongoLocal = 'mongodb://127.0.0.1/firstProjectDb';
+const mongoURI = 'the db host';
+// const mongoLocal = 'the local host';
 
 const connectDB = mongoose
       .connect(mongoURI, {

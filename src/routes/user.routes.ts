@@ -4,15 +4,15 @@ import {authJwt,verifySignup} from "../middlewares";
 
 const router = Router();
 
-router.get('/',[authJwt.verifyToken], userController.getUsers);
+router.get('/',[authJwt.verifyToken, authJwt.isAdmin], userController.getUsers);
 
-router.get('/current',[authJwt.verifyToken], userController.getUsersById);
+router.get('/current',[authJwt.verifyToken, authJwt.isAdmin], userController.getUsersById);
 
-router.post('/',[authJwt.verifyToken, verifySignup.checkRolesExists], userController.createUser);
+router.post('/',[authJwt.verifyToken, authJwt.isAdmin, verifySignup.checkRolesExists], userController.createUser);
 
-router.put('/:id',[authJwt.verifyToken, verifySignup.checkRolesExists], userController.modifyUserById);
+router.put('/:id',[authJwt.verifyToken, authJwt.isAdmin, verifySignup.checkRolesExists], userController.modifyUserById);
 
-router.delete('/:id',[authJwt.verifyToken], userController.deleteUserById);
+router.delete('/:id',[authJwt.verifyToken, authJwt.isAdmin], userController.deleteUserById);
 
 
 export default router;
