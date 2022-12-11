@@ -6,11 +6,10 @@ const router = Router();
 
 router.get('/',[authJwt.verifyToken, authJwt.isAdmin], userController.getUsers);
 
-router.get('/current',[authJwt.verifyToken, authJwt.isAdmin], userController.getUsersById);
+router.get('/current/:id',[authJwt.verifyToken, authJwt.isAdmin], userController.getUsersById);
 
-router.post('/',[authJwt.verifyToken, authJwt.isAdmin, verifySignup.checkRolesExists], userController.createUser);
-
-router.put('/:id',[authJwt.verifyToken, authJwt.isAdmin, verifySignup.checkRolesExists], userController.modifyUserById);
+router.put('/:id',[authJwt.verifyToken, authJwt.isAdmin], userController.modifyUserById);
+// router.put('/:id',[authJwt.verifyToken, authJwt.isAdmin, verifySignup.checkRolesExists], userController.modifyUserById);
 
 router.delete('/:id',[authJwt.verifyToken, authJwt.isAdmin], userController.deleteUserById);
 
